@@ -6,10 +6,10 @@ public class Faction {
 	public int influence { get; set; }
 
 	/// <summary>
-	///		Initializes a Faction with an ArrayList of members.
+	///		Initializes a Faction with a List of members.
 	/// </summary>
 	/// <param name="n">Name of the faction.</param>
-	/// <param name="mem">ArrayList of VIP members. First member is the leader.</param>
+	/// <param name="mem">List of VIP members. First member is the leader.</param>
 	/// <param name="inf">Value of influence from 1 to 100.</param>
 	public Faction(string n, List<VIP> mem, int inf) {
 		name = n;
@@ -56,5 +56,11 @@ public class Faction {
 		if (!found) {
 			System.Console.WriteLine("Tried to remove member, member not found");
 		}
+	}
+
+	/// <summary>Sets the leader of the faction (Inserts VIP into member List at 0).</summary>
+	/// <param name="vip">VIP to be made leader.</summary>
+	public void setLeader(VIP vip) {
+		members.Insert(0, vip);
 	}
 }

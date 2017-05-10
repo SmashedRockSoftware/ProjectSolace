@@ -2,18 +2,16 @@ using System.Collections.Generic;
 
 public class Faction {
 	public string name { get; set; }
-	public List<VIP> members {get; set; }
+	public List<VIP> members;
 	public int influence { get; set; }
 
 	/// <summary>
-	///		Initializes a Faction with a List of members.
+	///		Initializes a Faction without any members.
 	/// </summary>
 	/// <param name="n">Name of the faction.</param>
-	/// <param name="mem">List of VIP members. First member is the leader.</param>
 	/// <param name="inf">Value of influence from 1 to 100.</param>
-	public Faction(string n, List<VIP> mem, int inf) {
+	public Faction(string n, int inf) {
 		name = n;
-		members = mem;
 		influence = inf;
 	}
 
@@ -23,7 +21,7 @@ public class Faction {
 	/// <param name="n">Name of the faction.</param>
 	/// <param name="mem">Leader of the faction</param>
 	/// <param name="inf">Value of influence from 1 to 100.</param>
-	public Faction(string n, VIP leader, int inf) {
+	public Faction(string n, ref VIP leader, int inf) {
 		name = n;
 		members = new List<VIP>();
 		members.Add(leader);
@@ -31,36 +29,28 @@ public class Faction {
 	}
 
 	/// <summary>Returns the leader of the faction.</summary>
-	public object GetLeader() {
+	public VIP GetLeader() {
 		return members[0];
 	}
 
 	/// <summary>Adds a member to the faction.</summary>
 	/// <param name="mem">Member to add.</param>
-	public void AddMember(VIP mem) {
+	public void AddMember(ref VIP mem) {
 		members.Add(mem);
 	}
 
 	/// <summary>Removes a member from the faction.</summary>
 	/// <param name="name">String name of member to remove.</param>
-	public void removeMember(string name) {
-		bool found = false;
-
-		for(int i = 0; i < members.Count; i++) {
-			if (name == members[i].name) {
-				found = true;
-				members.RemoveAt(i);
-			}
-		}
-
-		if (!found) {
-			System.Console.WriteLine("Tried to remove member, member not found");
-		}
+	public void removeMember(VIP vip) {
+			members.Remove(vip);
 	}
 
 	/// <summary>Sets the leader of the faction (Inserts VIP into member List at 0).</summary>
 	/// <param name="vip">VIP to be made leader.</summary>
-	public void setLeader(VIP vip) {
+	public void setLeader(ref VIP vip) {
+		if (vip.faction.name == this.name)
+			members.Remove(vip);
+
 		members.Insert(0, vip);
 	}
 }

@@ -13,6 +13,7 @@ public class Faction {
 	public Faction(string n, int inf) {
 		name = n;
 		influence = inf;
+		members = new List<VIP>();
 	}
 
 	/// <summary>

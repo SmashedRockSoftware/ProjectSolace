@@ -1,7 +1,7 @@
 
 public class VIP : Person {
 	public int leadership { get; set; }
-	public Faction faction { get; set; }
+	public Faction faction;
 
 	/// <summary>
 	///		Initializes a VIP.
@@ -12,13 +12,33 @@ public class VIP : Person {
 	public VIP(Person person, int lead, ref Faction fac)
 			: base(person.name, person.age, person.occupation, person.gender,
 			person.ideology, person.awareness, person.happiness, person.indifference)	{
-				
+
 		leadership = lead;
 		faction = fac;
+		faction.AddMember(this);
 	}
 
-	///<summary>Kills the VIP (Missing implementation)</summary>
+	/// <summary>Kills the VIP (Missing implementation)</summary>
 	public void kill() {
 		faction.removeMember(this.name);
+	}
+
+	/// <summary>Returns the faction this VIP is in.</summary>
+	public Faction getFaction() {
+		return faction;
+	}
+
+	/// <summary>Changes the faction this VIP is in.</summary>
+	/// <param name="fac">New faction</param>
+	public void changeFaction(ref Faction fac) {
+		faction.removeMember(this.name);
+		faction = fac;
+		faction.AddMember(this);
+	}
+
+	///<summary>Kicks this VIP from their faction.</summary>
+	public void kickFromFaction() {
+		faction.removeMember(this.name);
+		faction = null;
 	}
 }

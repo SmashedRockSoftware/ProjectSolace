@@ -29,5 +29,5 @@ public class Person {
 	}
 }
 
-public enum Occupation { hacker, mercenary }
+public enum Occupation { hacker, mercenary, none }
 public enum Gender { female, male, unknown }

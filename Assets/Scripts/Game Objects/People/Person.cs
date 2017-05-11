@@ -1,6 +1,6 @@
 
 public class Person {
-	
+
 	public string firstName { get; set; }
 	public string lastName { get; set; }
 	public int age { get; set; }
@@ -14,11 +14,15 @@ public class Person {
 	/// <summary>
 	///		Initializes a Person.
 	/// </summary>
-	/// <param name="n">Name of person.</param>
+	/// <param name="f">First name of person.</param>
+	/// <param name="l">Last name of person.</param>
 	/// <param name="a">Age of person.</param>
 	/// <param name="occ">Occupation of person.</param>
 	/// <param name="gen">Gender of person.</param>
-	/// <param name="id">Ideology of person, from 1 to 100. Lower numbers are liberal, higher conservative.</param>
+	/// <param name="id">Ideology of person, from 1 to 100. Lower numbers are liberal, higher conservatiive.</param>
+	/// <param name="aw">Awareness of person.</param>
+	/// <param name="hap">Happiness of person.</param>
+	/// <param name="ind">indifference of person.</param>
 	public Person(string f, string l, int a, Occupation occ, Gender gen, int id, int aw, int hap, int ind)	{
 		firstName = f;
 		lastName = l;

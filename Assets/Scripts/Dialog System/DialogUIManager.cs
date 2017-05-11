@@ -5,39 +5,112 @@ using UnityEngine.UI;
 public class DialogUIManager : MonoBehaviour, IPointerClickHandler {
 
 	// Test dialog
-	private string[] name = new string[]{"Murderer", "Player", "DONALD TRUMP"};
-	private string[] dialog = new string[]{"I will kill Alex Jones.", "Sounds good bro.", "Well, that's all the text we've got. Click to repeat."};
+	private readonly string[] names = new string[]{"Murderer", "Player", "DONALD TRUMP"};
+	private readonly string[] dialog = new string[]{"I will kill Alex Jones.", "Sounds good bro.", "Well, that's all the text we've got. Click to repeat."};
+
+	private string currentDialog; // Current dialog of the system
+	private int currentChar = 0; // Current char of the dialog
+	private float lastTime; // The last time a char was added
+	private bool addingChars = false; // Whether chars are currently being added
 
 	private Text nameText; // Text component of name text
 	private Text dialogText; // Text component of dialog text
 
 	private int currentFrame = -1; // The current dialog set of the system
+	private float dialogSpeed = 0.03f; // In seconds per character
+	private bool instantText = false; // Whether text should appear instantly.
 
 	// Use this for initialization
-	void Start (){
+	void Start() {
 
+		// Getting Text components for name and dialog
 		nameText = GameObject.FindGameObjectWithTag("NameText").GetComponent<Text>();
 		dialogText = GameObject.FindGameObjectWithTag("DialogText").GetComponent<Text>();
 
 
-		if (gameObject.layer != 5){
+		if (gameObject.layer != 5) {
 			Debug.LogWarning("Dialog UI Manager is applied to an object not in UI layer, and will not function.");
 		}
 	}
 
-	// Dialog progression on clicks
-	public void OnPointerClick(PointerEventData eventData){
+	// Dialog speed control in update
+	void Update() {
 
-		currentFrame++; // Progress current dialog frame
+		// Check if we're displaying text instantly or not
+		if (instantText) {
 
-		// Resetting dialog
-		if (currentFrame > 2){
-			currentFrame = 0;
+			dialogText.text = currentDialog;
+			addingChars = false;
+
+		} else {
+
+			// Check for adding chars to text
+			if (addingChars && currentChar < currentDialog.Length && Time.time - lastTime > dialogSpeed) {
+				dialogText.text += currentDialog[currentChar]; // Add a new char
+				currentChar++; // Move to next index
+				lastTime = Time.time; // Set lastTime
+			}
+			else if (currentDialog != null && currentChar >= currentDialog.Length) {
+				addingChars = false; // We're not adding chars now
+			}
 		}
 
-		// Set new text
-		nameText.text = name[currentFrame];
-		dialogText.text = dialog[currentFrame];
+	}
+
+	// Dialog progression on clicks
+	public void OnPointerClick(PointerEventData eventData) {
+
+		// Check to see if we're already in some dialog or player is attempting to go back
+		if (!addingChars || eventData.button == PointerEventData.InputButton.Right) {
+			if (eventData.button == PointerEventData.InputButton.Left) {
+				currentFrame++; // Progress dialog on left click
+			}
+			else if (eventData.button == PointerEventData.InputButton.Right) {
+				currentFrame--; // Regress dialog on right click
+			}
+
+
+			// Resetting dialog
+			if (currentFrame > 2) {
+				currentFrame = 0;
+			}
+			else if (currentFrame < 0) {
+				currentFrame = 0;
+			}
+
+			// Set new name text and buffer new dialog text
+			nameText.text = names[currentFrame];
+			currentDialog = dialog[currentFrame];
+
+			// Reset dialog box, lastTime, and currentChar
+			dialogText.text = "";
+			lastTime = 0;
+			currentChar = 0;
+
+			addingChars = true; // We're adding chars now
+
+		} else { // Finishing current text if we're in some
+
+			dialogText.text = currentDialog;
+			addingChars = false;
+
+		}
 
 	}
+
+	/// <summary>
+	/// 	Sets the speed of the text to a value.
+	/// </summary>
+	/// <param name="speed">Speed in seconds per char.</param>
+	public void SetTextSpeed (float speed) {
+		dialogSpeed = speed;
+	}
+
+	/// <summary>
+	/// 	Toggles instant text on or off.
+	/// </summary>
+	public void ToggleInstantText() {
+		instantText = !instantText;
+	}
+
 }

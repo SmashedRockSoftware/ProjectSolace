@@ -1,13 +1,15 @@
 
 public class Person {
-	public string name { get; }
-	public int age { get; }
-	public Occupation occupation { get; }
-	public Gender gender { get; }
-	public int ideology { get; }	//Value from 1 to 100, 1-50 is liberal, 51-100 is conservative
-	public int awareness { get; } //Value from 1 to 100
-	public int happiness { get; } //Value from 1 to 100
-	public int indifference { get; } //Value from 1 to 100
+	
+	public string firstName { get; set; }
+	public string lastName { get; set; }
+	public int age { get; set; }
+	public Occupation occupation { get; set; }
+	public Gender gender { get; set; }
+	public int ideology { get; set; }	//Value from 1 to 100, 1-50 is liberal, 51-100 is conservative
+	public int awareness { get; set; } //Value from 1 to 100
+	public int happiness { get; set; } //Value from 1 to 100
+	public int indifference { get; set; } //Value from 1 to 100
 
 	/// <summary>
 	///		Initializes a Person.
@@ -17,8 +19,9 @@ public class Person {
 	/// <param name="occ">Occupation of person.</param>
 	/// <param name="gen">Gender of person.</param>
 	/// <param name="id">Ideology of person, from 1 to 100. Lower numbers are liberal, higher conservative.</param>
-	public Person(string n, int a, Occupation occ, Gender gen, int id, int aw, int hap, int ind)	{
-		name = n;
+	public Person(string f, string l, int a, Occupation occ, Gender gen, int id, int aw, int hap, int ind)	{
+		firstName = f;
+		lastName = l;
 		age = a;
 		occupation = occ;
 		gender = gen;
@@ -26,6 +29,11 @@ public class Person {
 		awareness = aw;
 		happiness = hap;
 		indifference = ind;
+	}
+
+	/// <summary>Returns full name (first name and last name).</summary>
+	public string GetFullName() {
+		return firstName + " " + lastName;
 	}
 }
 

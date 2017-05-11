@@ -1,5 +1,6 @@
 
 public class Employee : Person {
+	
 	public int fitness { get; set; }
 	public int intelligence { get; set; }
 	public int efficiency { get; set; }
@@ -16,9 +17,9 @@ public class Employee : Person {
 		/// <param name="minSal">Minimum salary employee will accept</param>
 		/// <param name="sal">How much employee is currently being payed</param>
 	public Employee(Person person, int fit, int intel, int eff, int minSal, int sal)
-			: base(person.name, person.age, person.occupation, person.gender,
+			: base(person.firstName, person.lastName, person.age, person.occupation, person.gender,
 			person.ideology, person.awareness, person.happiness, person.indifference) {
-				
+
 		fitness = fit;
 		intelligence = intel;
 		efficiency = eff;

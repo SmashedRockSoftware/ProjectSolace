@@ -1,6 +1,8 @@
 
 public class PersonBuilder {
-	public string name { get; set; }
+
+	public string firstName { get; set; }
+	public string lastName { get; set; }
 	public int age { get; set; }
 	public Occupation occupation { get; set; }
 	public Gender gender { get; set; }
@@ -11,7 +13,12 @@ public class PersonBuilder {
 
 	/// <summary>Returns a built Person</summary>
 	public Person GetResult() {
-		return new Person(name, age, occupation, gender, ideology, awareness,
+		return new Person(firstName, lastName, age, occupation, gender, ideology, awareness,
 				happiness, indifference);
+	}
+
+	public void SetFirstAndLastName(string f, string l) {
+		firstName = f;
+		lastName = l;
 	}
 }

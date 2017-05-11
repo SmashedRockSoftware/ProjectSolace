@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 
 public class Faction {
+	
 	public string name { get; set; }
 	public List<VIP> members;
 	public int influence { get; set; }
@@ -42,13 +43,13 @@ public class Faction {
 
 	/// <summary>Removes a member from the faction.</summary>
 	/// <param name="name">String name of member to remove.</param>
-	public void removeMember(VIP vip) {
+	public void RemoveMember(VIP vip) {
 			members.Remove(vip);
 	}
 
 	/// <summary>Sets the leader of the faction (Inserts VIP into member List at 0).</summary>
 	/// <param name="vip">Reference to VIP to be made leader.</summary>
-	public void setLeader(ref VIP vip) {
+	public void SetLeader(ref VIP vip) {
 		if (vip.faction.name == this.name)
 			members.Remove(vip);
 

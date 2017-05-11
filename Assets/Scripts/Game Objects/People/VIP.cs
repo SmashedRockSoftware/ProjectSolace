@@ -37,4 +37,23 @@ public class VIP : Person {
 		VIP test = this;
 		faction.AddMember(ref test);
 	}
+
+	/// <summary>Returns the faction this VIP is in.</summary>
+	public Faction getFaction() {
+		return faction;
+	}
+
+	/// <summary>Changes the faction this VIP is in.</summary>
+	/// <param name="fac">New faction</param>
+	public void changeFaction(ref Faction fac) {
+		faction.removeMember(this.name);
+		faction = fac;
+		faction.AddMember(this);
+	}
+
+	///<summary>Kicks this VIP from their faction.</summary>
+	public void kickFromFaction() {
+		faction.removeMember(this.name);
+		faction = null;
+	}
 }

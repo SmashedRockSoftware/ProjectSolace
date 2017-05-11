@@ -54,4 +54,10 @@ public class Faction {
 
 		members.Insert(0, vip);
 	}
+
+	/// <summary>Sets the leader of the faction (Inserts VIP into member List at 0).</summary>
+	/// <param name="vip">VIP to be made leader.</summary>
+	public void setLeader(VIP vip) {
+		members.Insert(0, vip);
+	}
 }

@@ -8,7 +8,7 @@ public class VIP : Person {
 	/// </summary>
 	/// <param name="person">Base person</param>
 	/// <param name="lead">Leadership capability from 1 to 100</param>
-	/// <param name="fac">Faction of VIP</param>
+	/// <param name="fac">Reference Faction of VIP</param>
 	public VIP(Person person, int lead, ref Faction fac)
 			: base(person.name, person.age, person.occupation, person.gender,
 			person.ideology, person.awareness, person.happiness, person.indifference)	{
@@ -30,7 +30,7 @@ public class VIP : Person {
 	}
 
 	/// <summary>Changes the faction this VIP is in.</summary>
-	/// <param name="fac">New faction</param>
+	/// <param name="fac">New reference to Faction</param>
 	public void changeFaction(ref Faction fac) {
 		faction.removeMember(this);
 		faction = fac;

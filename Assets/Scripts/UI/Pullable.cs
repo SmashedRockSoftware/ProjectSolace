@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 /// </summary>
 public class Pullable : MonoBehaviour, IDragHandler{
 
-	private const float Mult = 2; // Constant multiplier for drag speed
+	[SerializeField] private const float Mult = 2; // Constant multiplier for drag speed
 
 	private RectTransform panel; // RectTransform of this GUI object
 

@@ -23,7 +23,7 @@ public class Person {
 	/// <param name="aw">Awareness of person.</param>
 	/// <param name="hap">Happiness of person.</param>
 	/// <param name="ind">indifference of person.</param>
-	public Person(string f, string l, int a, Occupation occ, Gender gen, int id, int aw, int hap, int ind)	{
+	public Person(string f, string l, int a, Occupation occ, Gender gen, int id, int aw, int hap, int ind) {
 		firstName = f;
 		lastName = l;
 		age = a;

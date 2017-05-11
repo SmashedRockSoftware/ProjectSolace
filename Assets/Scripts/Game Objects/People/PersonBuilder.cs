@@ -16,7 +16,10 @@ public class PersonBuilder {
 		return new Person(firstName, lastName, age, occupation, gender, ideology, awareness,
 				happiness, indifference);
 	}
-
+	
+	/// <summary>Sets the first and last name of the person.</summary>
+	/// <param name="f">First name.</param>
+	/// <param name="l">Last name.</param>
 	public void SetFirstAndLastName(string f, string l) {
 		firstName = f;
 		lastName = l;

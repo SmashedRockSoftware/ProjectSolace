@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 
 public class Faction {
-	
+
 	public string name { get; set; }
-	public List<VIP> members;
+	private List<VIP> members;
 	public int influence { get; set; }
 
 	/// <summary>

@@ -15,12 +15,27 @@ public class VIP : Person {
 
 		leadership = lead;
 		faction = fac;
-		faction.AddMember(this);
+		VIP test = this;
+		faction.AddMember(ref test);
 	}
 
 	/// <summary>Kills the VIP (Missing implementation)</summary>
 	public void kill() {
-		faction.removeMember(this.name);
+		faction.removeMember(this);
+	}
+
+	/// <summary>Returns the faction this VIP is in.</summary>
+	public Faction getFaction() {
+		return faction;
+	}
+
+	/// <summary>Changes the faction this VIP is in.</summary>
+	/// <param name="fac">New faction</param>
+	public void changeFaction(ref Faction fac) {
+		faction.removeMember(this);
+		faction = fac;
+		VIP test = this;
+		faction.AddMember(ref test);
 	}
 
 	/// <summary>Returns the faction this VIP is in.</summary>

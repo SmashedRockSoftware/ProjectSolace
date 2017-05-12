@@ -1,4 +1,3 @@
-
 public class PersonBuilder {
 
 	public string firstName { get; set; }

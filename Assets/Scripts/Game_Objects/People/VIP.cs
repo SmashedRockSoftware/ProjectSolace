@@ -1,4 +1,3 @@
-
 public class VIP : Person {
 
 	public int leadership { get; set; }

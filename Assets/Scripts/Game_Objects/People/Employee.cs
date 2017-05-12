@@ -1,4 +1,3 @@
-
 public class Employee : Person {
 
 	public int fitness { get; set; }

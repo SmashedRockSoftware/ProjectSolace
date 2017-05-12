@@ -1,6 +1,6 @@
 
 public class Employee : Person {
-	
+
 	public int fitness { get; set; }
 	public int intelligence { get; set; }
 	public int efficiency { get; set; }

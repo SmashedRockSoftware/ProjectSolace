@@ -21,7 +21,7 @@ public class Faction {
 	///		Initializes a Faction with a single leader member.
 	/// </summary>
 	/// <param name="n">Name of the faction.</param>
-	/// <param name="mem">Reference to VIP Leader of the faction</param>
+	/// <param name="leader">Reference to VIP Leader of the faction</param>
 	/// <param name="inf">Value of influence from 1 to 100.</param>
 	public Faction(string n, ref VIP leader, int inf) {
 		name = n;
@@ -42,7 +42,7 @@ public class Faction {
 	}
 
 	/// <summary>Removes a member from the faction.</summary>
-	/// <param name="name">String name of member to remove.</param>
+	/// <param name="vip">String name of member to remove.</param>
 	public void RemoveMember(VIP vip) {
 			members.Remove(vip);
 	}

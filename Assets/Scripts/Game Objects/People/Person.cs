@@ -1,4 +1,3 @@
-
 public class Person {
 
 	public string firstName { get; set; }

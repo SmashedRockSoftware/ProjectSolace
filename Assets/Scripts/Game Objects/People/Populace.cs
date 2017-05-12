@@ -1,4 +1,3 @@
-
 public class Populace {
 	public int awareness { get; set; }
 	public int happiness { get; set; }

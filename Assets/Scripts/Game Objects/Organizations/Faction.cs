@@ -48,7 +48,7 @@ public class Faction {
 	}
 
 	/// <summary>Sets the leader of the faction (Inserts VIP into member List at 0).</summary>
-	/// <param name="vip">Reference to VIP to be made leader.</summary>
+	/// <param name="vip">Reference to VIP to be made leader.</param>
 	public void SetLeader(ref VIP vip) {
 		if (vip.faction.name == this.name)
 			members.Remove(vip);

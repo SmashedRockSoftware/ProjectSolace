@@ -16,7 +16,7 @@ public class DialogUIManager : MonoBehaviour, IPointerClickHandler {
 	private Text nameText; // Text component of name text
 	private Text dialogText; // Text component of dialog text
 
-	private int currentFrame = -1; // The current dialog set of the system
+	private int currentFrame = -1;
 	private float dialogSpeed = 0.03f; // In seconds per character
 	private bool instantText = false; // Whether text should appear instantly.
 
@@ -47,11 +47,11 @@ public class DialogUIManager : MonoBehaviour, IPointerClickHandler {
 			// Check for adding chars to text
 			if (addingChars && currentChar < currentDialog.Length && Time.time - lastTime > dialogSpeed) {
 				dialogText.text += currentDialog[currentChar]; // Add a new char
-				currentChar++; // Move to next index
-				lastTime = Time.time; // Set lastTime
+				currentChar++; // Move to next char
+				lastTime = Time.time;
 			}
 			else if (currentDialog != null && currentChar >= currentDialog.Length) {
-				addingChars = false; // We're not adding chars now
+				addingChars = false; // Keep addingChars false for as long as chars aren't being added
 			}
 		}
 

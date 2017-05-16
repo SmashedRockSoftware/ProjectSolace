@@ -8,9 +8,9 @@ public class DialogueUIManager : MonoBehaviour, IPointerClickHandler {
 	// when there's a dialogue flow manager in place.
 
 	// Test dialog
-	private readonly string[] names = new string[]{"Murderer", "Player", "DONALD TRUMP"};
-	private readonly string[] dialogue = new string[]{"I will kill Alex Jones.", "&choice", "Well, that's all the text we've got. Click to repeat."};
-	private readonly string[] choices = new string[]{"Execute Order 66", "Gas 'em", "Make sure it's painless.", "Make sure it's painful."};
+	private readonly string[] names = {"Murderer", "Player", "DONALD TRUMP"};
+	private readonly string[] dialogue = {"I will kill Alex Jones.", "&choice", "Well, that's all the text we've got. Click to repeat."};
+	private readonly string[] choices = {"Execute Order 66", "Gas 'em", "Make sure it's painless.", "Make sure it's painful."};
 
 	private const string ChoiceString = "&choice"; // Constant for marking a choice in dialogue
 

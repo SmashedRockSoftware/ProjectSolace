@@ -4,6 +4,9 @@ using UnityEngine.UI;
 
 public class DialogueUIManager : MonoBehaviour, IPointerClickHandler {
 
+	// There's a lot of stuff that this "UI Manager" does that shouldn't be done here. We'll have to move some of it
+	// when there's a dialogue flow manager in place.
+
 	// Test dialog
 	private readonly string[] names = new string[]{"Murderer", "Player", "DONALD TRUMP"};
 	private readonly string[] dialogue = new string[]{"I will kill Alex Jones.", "&choice", "Well, that's all the text we've got. Click to repeat."};
@@ -33,6 +36,11 @@ public class DialogueUIManager : MonoBehaviour, IPointerClickHandler {
 		nameText = GameObject.FindGameObjectWithTag("NameText").GetComponent<Text>();
 		dialogueText = GameObject.FindGameObjectWithTag("DialogText").GetComponent<Text>();
 
+		// Adding button listeners
+		choiceButtons[0].onClick.AddListener(() => ChoiceButtonCallback(0));
+		choiceButtons[1].onClick.AddListener(() => ChoiceButtonCallback(1));
+		choiceButtons[2].onClick.AddListener(() => ChoiceButtonCallback(2));
+		choiceButtons[3].onClick.AddListener(() => ChoiceButtonCallback(3));
 
 		if (gameObject.layer != 5) {
 			Debug.LogWarning("Dialog UI Manager is applied to an object not in UI layer, and will not function.");
@@ -66,58 +74,81 @@ public class DialogueUIManager : MonoBehaviour, IPointerClickHandler {
 	// Dialog progression on clicks
 	public void OnPointerClick(PointerEventData eventData) {
 
-		// Check to see if we're already in some dialog or player is attempting to go back
-		if (!addingChars || eventData.button == PointerEventData.InputButton.Right) {
-			if (eventData.button == PointerEventData.InputButton.Left) {
-				currentFrame++; // Progress dialog on left click
-			}else if (eventData.button == PointerEventData.InputButton.Right) {
-				currentFrame--; // Regress dialog on right click
+		if (eventData.button == PointerEventData.InputButton.Right) { // Check if the player's going back
+			if (currentFrame > 0 && !dialogue[currentFrame - 1].Equals("&choice")) {
+				// Check if player is attempting to go back to a choice
+				ChangeDialogueFrame(false);
 			}
-
-
-			// Resetting dialog, should be removed/made general later
-			if (currentFrame > 2) {
-				currentFrame = 0;
-			}
-			else if (currentFrame < 0) {
-				currentFrame = 0;
-			}
-
-			// Check if next dialogue node is a choice or not
-			if (dialogue[currentFrame].Equals(ChoiceString)) { // If a choice
-
-				SetChoiceButtonEnable(true, choices.Length); // Enable buttons
-				dialogueText.text = ""; // Remove the previous text from the screen
-
-				// Fill in choice text with choices and enable
-				for (int i = 0; i < choices.Length; i++) {
-					choiceText[i].text = choices[i];
-				}
-
-			} else { // Not a choice
-
-				// Disable all choice buttons
-				SetChoiceButtonEnable(false, 4);
-
-				// Set new name text and buffer new dialog text
-				nameText.text = names[currentFrame];
-				currentDialog = dialogue[currentFrame];
-
-				// Reset dialog box, lastTime, and currentChar
-				dialogueText.text = "";
-				lastTime = 0;
-				currentChar = 0;
-
-				addingChars = true; // We're adding chars now
-
-			}
-
+		} else if(!addingChars) { // If we're not already in the middle of a frame, and is a left click
+			ChangeDialogueFrame(true);
 		} else { // Finishing current text if we're in some
 
 			dialogueText.text = currentDialog;
 			addingChars = false;
 
 		}
+
+	}
+
+	/// <summary>
+	/// 	Changes the current dialogue frame forwards or backwards.
+	/// </summary>
+	/// <param name="forward">Whether to advance forwards or backwards.</param>
+	private void ChangeDialogueFrame(bool forward) {
+		if (forward) {
+			currentFrame++; // Progress dialog
+		} else {
+			currentFrame--; // Regress dialog
+		}
+
+		// Resetting dialog, should be removed/made general later
+		if (currentFrame > 2) {
+			currentFrame = 0;
+		}
+		else if (currentFrame < 0) {
+			currentFrame = 0;
+		}
+
+		nameText.text = names[currentFrame]; // Set new name text
+
+		// Check if next dialogue node is a choice or not
+		if (dialogue[currentFrame].Equals(ChoiceString)) { // If a choice
+
+			SetChoiceButtonEnable(true, choices.Length); // Enable buttons
+			dialogueText.text = ""; // Remove the previous text from the screen
+
+			// Fill in choice text with choices and enable
+			for (int i = 0; i < choices.Length; i++) {
+				choiceText[i].text = choices[i];
+			}
+
+		} else { // Not a choice
+
+			// Disable all choice buttons
+			SetChoiceButtonEnable(false, 4);
+
+			currentDialog = dialogue[currentFrame]; // Buffer new dialog text
+
+			// Reset dialog box, lastTime, and currentChar
+			dialogueText.text = "";
+			lastTime = 0;
+			currentChar = 0;
+
+			addingChars = true; // We're adding chars now
+
+		}
+
+	}
+
+	/// <summary>
+	/// 	The callback function for the choice buttons.
+	/// </summary>
+	/// <param name="number">The number of the choice that was made.</param>
+	private void ChoiceButtonCallback(int number) {
+
+		ChangeDialogueFrame(true); // Advance the frame
+
+		Debug.Log(number);
 
 	}
 

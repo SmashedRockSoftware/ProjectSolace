@@ -2,10 +2,10 @@
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class DialogueUIManager : MonoBehaviour, IPointerClickHandler {
-
-	// There's a lot of stuff that this "UI Manager" does that shouldn't be done here. We'll have to move some of it
-	// when there's a dialogue flow manager in place.
+/// <summary>
+/// 	Manager component for dialogue flow and dialogue UI
+/// </summary>
+public class DialogueManager : MonoBehaviour, IPointerClickHandler {
 
 	// Test dialog
 	private readonly string[] names = {"Murderer", "Player", "DONALD TRUMP"};

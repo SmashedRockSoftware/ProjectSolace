@@ -43,7 +43,7 @@ public class DialogueUIManager : MonoBehaviour, IPointerClickHandler {
 		choiceButtons[3].onClick.AddListener(() => ChoiceButtonCallback(3));
 
 		if (gameObject.layer != 5) {
-			Debug.LogWarning("Dialog UI Manager is applied to an object not in UI layer, and will not function.");
+			Debug.LogWarning("Dialog UI Manager is applied to " + gameObject.name + ", which is not in UI layer, and will not function.");
 		}
 	}
 

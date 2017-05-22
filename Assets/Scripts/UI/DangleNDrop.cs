@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DangleNDrop : MonoBehaviour, IDragHandler
-{
+public class DangleNDrop : MonoBehaviour, IDragHandler {
 	/// <summary>
 	/// A component for UI elements that makes them pullable. Pullable components can be dragged around by the mouse,
 	///  but are not dragged to the mouse itself.
@@ -14,9 +13,8 @@ public class DangleNDrop : MonoBehaviour, IDragHandler
 	// RectTransform of this GUI object
 
 	// Initialization, getting RectTransform
-	void Awake ()
-	{
-		panel = GetComponent<RectTransform> ();
+	void Awake() {
+		panel = GetComponent<RectTransform>();
 
 		if (panel == null) {
 			Debug.LogError (gameObject.name + " has Pullable, but no RectTransform!");
@@ -24,11 +22,8 @@ public class DangleNDrop : MonoBehaviour, IDragHandler
 	}
 
 	// Unity Method for detecting mouse dragging on a component
-	public void OnDrag (PointerEventData pointerData)
-	{
-
+	public void OnDrag (PointerEventData pointerData) {
 		// Add mouse position delta onto panel position
 		panel.position += Mult * new Vector3 (pointerData.delta.x, pointerData.delta.y);
-
 	}
 }

@@ -24,6 +24,6 @@ public class DangleNDrop : MonoBehaviour, IDragHandler {
 	// Unity Method for detecting mouse dragging on a component
 	public void OnDrag (PointerEventData pointerData) {
 		// Add mouse position delta onto panel position
-		panel.position += Mult * new Vector3 (pointerData.delta.x, pointerData.delta.y);
+		panel.position += Mult * new Vector3(pointerData.delta.x, pointerData.delta.y);
 	}
 }
